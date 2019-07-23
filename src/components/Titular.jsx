@@ -1,13 +1,16 @@
 import React from "react"
 import { connect } from "react-redux"
 
+//Material
+import Button from '@material-ui/core/Button';
+
+
 const Titular=(props)=>(
     <section>
-        <ul>
-            {props.titulares.map(e=><li key={e.id}>{e.name} - {e.id}
-                <button onClick={()=>props.eliminarTitular(e)}>X</button>
-            </li>)}
-        </ul>
+            {props.titulares.map(e=>
+            <div key={e.id}>{e.name} - {e.id}
+                <Button onClick={()=>props.eliminarTitular(e)} color="secondary" variant="contained">X</Button>
+            </div>)}
     </section>
 )
 

@@ -1,35 +1,40 @@
-import React, { useEffect} from "react"
+import React, { useEffect, useState, Fragment } from "react"
 import { connect } from "react-redux"
 
 
+//Material
+import Button from '@material-ui/core/Button';
+import Box from '@material-ui/core/Box';
 
 const Jugador = (props) => {
-
+    const [isLoading, setIsLoading] = useState(false)
 
     useEffect(() => {
-        cargar().then((data) => {
-            let jugadores = data.map(e =>({ id: e.id, name: e.name }))
+        const cargar = async () => {
+            setIsLoading(true)
+            const response = await fetch('https://jsonplaceholder.typicode.com/users')
+            const data = await response.json();
+            let jugadores = await data.map(e => ({ id: e.id, name: e.name }))
             props.cargarJugadores(jugadores)
-        })
+            setIsLoading(false)
+        }
+        cargar()
     }, [])
 
-
-    const cargar = async () => {
-        const response = await fetch('https://jsonplaceholder.typicode.com/users')
-        const data = await response.json();
-        return Promise.resolve(data);
-    }
-
     return (
-        <section>
-            <ul>
-                {props.jugadores.map(e => <li key={e.id}>{e.name}-{e.id}
-                    <button onClick={props.agregarTitular.bind(this, e)}>Titular</button>
-                    <button onClick={props.agregarSuplente.bind(this, e)}>Suplente</button>
-                </li>)}
-
-            </ul>
-        </section>
+        <Fragment>
+            {isLoading ?
+                <div>Loading...</div> :
+                <section>
+                    {props.jugadores.map(e =>
+                        <Box key={e.id}>
+                            {e.name}-{e.id}
+                            <Button onClick={props.agregarTitular.bind(this, e)} color="primary" variant="outlined">Titular</Button>
+                            <Button onClick={props.agregarSuplente.bind(this, e)} color="secondary" variant="outlined">Suplente</Button>
+                        </Box>)}
+                </section>
+            }
+        </Fragment>
     )
 }
 

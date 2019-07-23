@@ -1,15 +1,17 @@
 import React from "react";
 import {connect} from "react-redux"
 
+//Material
+import Button from '@material-ui/core/Button';
+
 const Suplente=({suplentes, eliminarSuplente})=>(
     <section>
-        <ul>
             {suplentes.map(row=>
-            <li key={row.id}>{row.name}-{row.id}
-                <button onClick={eliminarSuplente.bind(this,row)}>X</button>
-            </li>)
+            <div key={row.id}>
+                {row.name}-{row.id}
+                <Button onClick={()=>eliminarSuplente(row)} color="secondary" variant="contained">X</Button>
+            </div>)
             }
-        </ul>
     </section>
 )
 

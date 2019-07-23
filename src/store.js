@@ -14,8 +14,8 @@ const reducer = (state = initializeStore, action) => {
       titulares: state.titulares.concat(action.jugador),
       jugadores: state.jugadores.filter(jugadorActual => jugadorActual.id !== action.jugador.id)
     }
-
   }
+  
   if (action.type === "AGREGAR_SUPLENTE") {
     return {
       ...state,
