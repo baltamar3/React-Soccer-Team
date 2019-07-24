@@ -5,9 +5,18 @@ import { connect } from "react-redux"
 //Material
 import Button from '@material-ui/core/Button';
 import Box from '@material-ui/core/Box';
+import { makeStyles } from '@material-ui/core/styles';
+
+//styles
+const useStyles = makeStyles(theme => ({
+    button: {
+      margin: theme.spacing(0.5),
+    }
+  }));
 
 const Jugador = (props) => {
     const [isLoading, setIsLoading] = useState(false)
+    const classes = useStyles();
 
     useEffect(() => {
         const cargar = async () => {
@@ -29,8 +38,8 @@ const Jugador = (props) => {
                     {props.jugadores.map(e =>
                         <Box key={e.id}>
                             {e.name}-{e.id}
-                            <Button onClick={props.agregarTitular.bind(this, e)} color="primary" variant="outlined">Titular</Button>
-                            <Button onClick={props.agregarSuplente.bind(this, e)} color="secondary" variant="outlined">Suplente</Button>
+                            <Button onClick={props.agregarTitular.bind(this, e)} color="primary" variant="contained" className={classes.button}>Titular</Button>
+                            <Button onClick={props.agregarSuplente.bind(this, e)} color="secondary" variant="contained" className={classes.button}>Suplente</Button>
                         </Box>)}
                 </section>
             }
@@ -39,7 +48,7 @@ const Jugador = (props) => {
 }
 
 
-
+//Metodos de redux
 const mapStateToProps = (state) => {
     return {
         jugadores: state.jugadores

@@ -3,6 +3,7 @@ import Jugadores from "./components/Jugador";
 import Titulares from './components/Titular';
 import Suplentes from "./components/Suplente"
 
+
 //material
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
