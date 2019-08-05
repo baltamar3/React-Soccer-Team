@@ -32,8 +32,6 @@ const Jugador = (props) => {
 
     return (
         <Fragment>
-            {isLoading ?
-                <div>Loading...</div> :
                 <section>
                     {props.jugadores.map(e =>
                         <Box key={e.id}>
@@ -42,7 +40,7 @@ const Jugador = (props) => {
                             <Button onClick={props.agregarSuplente.bind(this, e)} color="secondary" variant="contained" className={classes.button}>Suplente</Button>
                         </Box>)}
                 </section>
-            }
+            
         </Fragment>
     )
 }
